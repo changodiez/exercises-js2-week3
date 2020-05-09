@@ -17,10 +17,6 @@ Call addMovies to add the new movie to the list and then showMovies to see the m
 How many movies can you see on your page?
 
 Task 3
-Can you make sure the new movie you just added is showing on the screen? 
-TIP: use callbacks
-
-Task 4
 Create a form anywhere on your page. The form should have
 - 4 input text fields, one for each property of your movie object
 - a "save" button.
@@ -31,8 +27,7 @@ TIP: Use the functions you created on tasks 1-3
 
 ================
 */
-var movies = [
-  {
+var movies = [{
     title: "Color Out of Space",
     director: "Richard Stanley",
     type: "sci-fi",
@@ -58,10 +53,52 @@ var movies = [
   },
 ];
 
+// Task 1
 // create showMovies function
+function showMovies() {
+  var listOfMovies = document.getElementById("all-movies");
+
+  for (var i = 0; i < movies.length; i++) {
+    muvi = movies[i];
+    var MoviesList = document.createElement("p");
+    MoviesList.innerHTML = "Movie Title:" + muvi.title + "Director: " + muvi.director;
+    listOfMovies.appendChild(MoviesList)
+  }
+
+  numberMovies = document.getElementById("movies-number");
+  numberMovies.innerHTML = movies.length;
 
 
-// create a new movie object for your favorite movie
+}
+
+setTimeout(showMovies, 1000);
+
+var movie = {
+  title: "Apocalipsis Now",
+  director: "Francis Ford Coppola",
+  type: "Belica",
+  haveWatched: true,
+}
+
+function addMovies() {
+  movies.push(movie);
+}
+
+//showMovies();
+setTimeout(function () {
+  addMovies(movie);
+  showMovies();
+}, 1000);
 
 
-// create addMovies function
+
+
+
+/* Task 3
+Create a form anywhere on your page. The form should have
+- 4 input text fields, one for each property of your movie object
+- a "save" button.
+When the button is clicked
+- The field values should be used to create a new movie object literal
+- The new movie is then added to the list of movies and gets displayed on your page
+TIP: Use the functions you created on tasks 1-3*/
