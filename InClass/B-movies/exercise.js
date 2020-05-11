@@ -57,21 +57,24 @@ var movies = [{
 // create showMovies function
 function showMovies() {
   var listOfMovies = document.getElementById("all-movies");
-
+  listOfMovies.innerHTML = "";
   for (var i = 0; i < movies.length; i++) {
-    muvi = movies[i];
+    var muvi = movies[i];
     var MoviesList = document.createElement("p");
-    MoviesList.innerHTML = "Movie Title:" + muvi.title + "Director: " + muvi.director;
+    MoviesList.innerHTML = "Movie Title:" + muvi.title +" -- "+ "Director: " + muvi.director;
     listOfMovies.appendChild(MoviesList)
   }
 
-  numberMovies = document.getElementById("movies-number");
+  var numberMovies = document.getElementById("movies-number");
+
   numberMovies.innerHTML = movies.length;
 
 
 }
 
-setTimeout(showMovies, 1000);
+//Task 2 
+
+//setTimeout(showMovies, 1000);
 
 var movie = {
   title: "Apocalipsis Now",
@@ -80,19 +83,15 @@ var movie = {
   haveWatched: true,
 }
 
-function addMovies() {
-  movies.push(movie);
+function addMovies(newMovie) {
+  movies.push(newMovie);
 }
 
-//showMovies();
+showMovies();
 setTimeout(function () {
   addMovies(movie);
   showMovies();
 }, 1000);
-
-
-
-
 
 /* Task 3
 Create a form anywhere on your page. The form should have
@@ -102,3 +101,37 @@ When the button is clicked
 - The field values should be used to create a new movie object literal
 - The new movie is then added to the list of movies and gets displayed on your page
 TIP: Use the functions you created on tasks 1-3*/
+
+var saveButton = document.querySelector("#saveButton");
+saveButton.addEventListener("click", saveMovie);
+
+function saveMovie(event) {
+  var movieTitleInput = document.querySelector("#movieTitle");
+  var movieTitle = movieTitleInput.value;
+
+  var movieDirectorInput = document.querySelector("#movieDirector");
+  var movieDirector = movieDirectorInput.value;
+
+  var movieTypeInput = document.querySelector("#movieType");
+  var movieType = movieTypeInput.value;
+
+  var movieWatchedInput = document.querySelector("#movieWatched");
+  var movieWatched = movieWatchedInput.checked;
+
+
+  if (movieTitle && movieDirector && movieType) {
+    var newMovies = {
+      title: movieTitle,
+      director: movieDirector,
+      type: movieType,
+      haveWatched: movieWatched
+    };
+    console.log(newMovies);
+
+    addMovies(newMovies);
+    console.log(movies);
+    showMovies();
+  }
+
+  event.preventDefault();
+}
